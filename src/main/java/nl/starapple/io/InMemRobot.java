@@ -38,7 +38,8 @@ public class InMemRobot implements Robot {
 
     @Override
     public PokerMove getMove(String botCodeName, long timeOut) {
-        return new PokerMove(handler.getMove(timeOut));
+        poker.PokerMove move = handler.getMove(timeOut);
+        return new PokerMove(move.getAction(), move.getAmount());
     }
 
     @Override
