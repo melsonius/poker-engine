@@ -18,7 +18,6 @@
 package nl.starapple.backend;
 
 import bot.JaegerBot;
-import bot.JaegerBotv10;
 import nl.starapple.io.IORobot;
 import nl.starapple.io.InMemParser;
 import nl.starapple.io.InMemRobot;
@@ -46,17 +45,21 @@ public class RunPoker {
 
 
     double[] bot1Params = new double[]{
-            0.7827582368322367, 0.06378707410683865, 0.45396547315323343,
-            0.22673496899818973, 0.3174474106323325, 0.25854885857885884,
-            0.36240821444166577, 0.6314778947389493, 0.8960071059677515
+            0.95, 0.00, 0.00,
+            0.05, 0.20, 0.40,
+            0.51, 0.60, 0.75,
+            0.05, 0.29, 0.75,
+            0.75, 0.99, 0.00,
+            0.95, 0.99, 0.00,
     };
 
     double[] bot2Params = new double[]{
-            0.8428318265827384, 0.4241147579658834, 0.1851124953912191,
-            0.67033761139272, 0.8475690362738106, 0.8752697596196696,
-            0.17942952566418047, 0.8366368238250294, 0.8745994612118575,
-            0.67033761139272, 0.8475690362738106, 0.8752697596196696,
-            0.17942952566418047, 0.8366368238250294, 0.8745994612118575
+            0.95, 0.00, 0.00,
+            0.05, 0.20, 0.40,
+            0.51, 0.60, 0.75,
+            0.05, 0.29, 0.75,
+            0.75, 0.99, 0.00,
+            0.95, 0.99, 0.00,
     };
 
 
@@ -69,9 +72,12 @@ public class RunPoker {
 
         // current best
         double[] bot1Params = new double[]{
-                0.73, 0.80, 0.85,
-                0.25, 0.98, 0.99,
-                0.32, 0.77, 0.88
+                0.95, 0.00, 0.00,
+                0.05, 0.20, 0.40,
+                0.51, 0.60, 0.75,
+                0.05, 0.29, 0.75,
+                0.75, 0.99, 0.00,
+                0.95, 0.99, 0.00,
         };
 
         // act first
@@ -80,8 +86,27 @@ public class RunPoker {
         // respond to check last round
         // respond to bet last round
         double[] bot2Params = new double[]{
-                0.951354624208571, 0.09745404997461593, 1.0597600353612486, 0.06865006089226182, 0.0240817060898516, 0.4010310588981616, 0.5067327847402583, 0.6032101800208544, 0.7781410987078179, 0.0055631200459470564, 0.29169722894875316, 0.03173201442161695, 1.200414687026263, 0.13519575710021836, 0.04837689697358494
-//                0.006451824414894969, 4.5133543566131396, 0.24318126969670537, 0.09431953475329545, 1.2834596020031113, 0.8651105171006639, 3.7482411191185645, 0.27138254071874035, 0.41297987931952707, 0.3857164722719405, 0.22362058161888376, 1.02888847247868, 0.008883131593575731, 0.29134321698557436, 1.0916110325934016
+//                0.95, 0.00, 0.00,
+//                0.05, 0.20, 0.40,
+//                0.51, 0.60, 0.75,
+//                0.05, 0.29, 0.75,
+//                0.75, 0.99, 0.00,
+//                0.95, 0.99, 0.00,
+
+                0.1582341210196752, 0.32673722602720234, 0.16813368273907014,
+                0.6394187819550321, 0.46889810055137604, 1.1231643328713636,
+                0.8903957730916621, 0.5978896493940581, 0.582029119990688,
+                0.09417521061226142, 0.18353069893915405, 1.2190974049308645,
+                1.7601316810651442, 0.13867256679856824, 0.8823894408193513,
+                1.2571947807335297, 0.20119561714178874, 1.0490295770028804
+
+//                0.73, 0.80, 0.85,   // first action
+//                0.25, 0.98, 0.99,   // opp checked
+//                0.32, 0.77, 0.88,   // opp bet
+//                0.25, 0.98, 0.99,   // opp checked to end last round
+//                0.32, 0.77, 0.88,   // opp called last round
+//                0.50, 0.77, 0.88    // opp raised last round
+
         };
 
         long start = System.currentTimeMillis();
@@ -111,7 +136,7 @@ public class RunPoker {
 
     /*/
     static int POPULATION_SIZE = 150;
-    static int SOLUTION_LENGTH = 5 * 3;
+    static int SOLUTION_LENGTH = 6 * 3;
     static int MAX_ITERATIONS = 100000;
 
     private static Population initPopulation() {
@@ -181,30 +206,13 @@ public class RunPoker {
         CalculateScore score = new CalculateScore() {
             @Override
             public double calculateScore(MLMethod method) {
-//                double[] params = ((DoubleArrayGenome) method).getData();
-//
-//                int numRuns = 50;
-//                DoubleSummaryStatistics stats = new DoubleSummaryStatistics();
-//                do {
-//                    for (int i = 0; i < numRuns; ++i) {
-//                        if (doOneGame(args, params)) {
-//                            stats.accept(1.0);
-//                        } else {
-//                            stats.accept(0.0);
-//                        }
-//                    }
-//                } while (stats.getAverage() > 0.45 && stats.getCount() < 500);
-//
-//                return stats.getAverage();
-
                 double[] params = ((DoubleArrayGenome) method).getData();
 
-                Population pop = ((DoubleArrayGenome) method).getPopulation();
+                int numRuns = 50;
                 DoubleSummaryStatistics stats = new DoubleSummaryStatistics();
                 do {
-                    for (Genome g : pop.flatten()) {
-                        double[] oppParams = ((DoubleArrayGenome) g).getData();
-                        if (doOneGame(args, params, oppParams)) {
+                    for (int i = 0; i < numRuns; ++i) {
+                        if (doOneGame(args, params)) {
                             stats.accept(1.0);
                         } else {
                             stats.accept(0.0);
@@ -213,6 +221,23 @@ public class RunPoker {
                 } while (stats.getAverage() > 0.45 && stats.getCount() < 500);
 
                 return stats.getAverage();
+
+//                double[] params = ((DoubleArrayGenome) method).getData();
+//
+//                Population pop = ((DoubleArrayGenome) method).getPopulation();
+//                DoubleSummaryStatistics stats = new DoubleSummaryStatistics();
+//                do {
+//                    for (Genome g : pop.flatten()) {
+//                        double[] oppParams = ((DoubleArrayGenome) g).getData();
+//                        if (doOneGame(args, params, oppParams)) {
+//                            stats.accept(1.0);
+//                        } else {
+//                            stats.accept(0.0);
+//                        }
+//                    }
+//                } while (stats.getAverage() > 0.45 && stats.getCount() < 500);
+//
+//                return stats.getAverage();
             }
 
             @Override
@@ -317,7 +342,8 @@ public class RunPoker {
 
 //                new InMemRobot(new InMemParser(new MonteCarloJaegerBot(100, bot1Params)))
 //                new InMemRobot(new InMemParser(new JaegerBotv10(100)))
-                new InMemRobot(new InMemParser(new JaegerBotv10(100, bot1Params)))
+//                new InMemRobot(new InMemParser(new JaegerBotv10(100, bot1Params)))
+                new InMemRobot(new InMemParser(new JaegerBot(100, bot1Params))),
 //                new InMemRobot(new InMemParser(new EvilJaegerBot("evil")))
         };
         bot1 = bot1Options[ThreadLocalRandom.current().nextInt(bot1Options.length)];

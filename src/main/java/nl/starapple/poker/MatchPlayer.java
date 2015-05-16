@@ -383,7 +383,7 @@ public class MatchPlayer
 			handHistory += "\nSettings tableRound " + tournamentTableRound;
 			handHistory += "\nSettings tableId " + tournamentTableNumber;
 		}
-		handHistory += "\nSettings timeBank " + TIMEBANK_MAX;
+		handHistory += "\nSettings timebank " + TIMEBANK_MAX;
 		handHistory += "\nSettings timeTurn " + TIME_PER_MOVE;
 		handHistory += "\nSettings players " + numberOfBots;
 		for(int i = 0; i < numberOfBots; i++)

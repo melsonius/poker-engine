@@ -73,17 +73,17 @@ public class MatchInfo
 		String str = "";
 		if(infoType.equals(MatchInfoType.FIRST_TABLE))
 		{
-			str += String.format("Settings timeBank %d\n", timeBank);
-			str += String.format("Settings timePerMove %d\n", timePerMove);
+			str += String.format("Settings timebank %d\n", timeBank);
+			str += String.format("Settings time_per_move %d\n", timePerMove);
 			if(isTournament)
 			{
-				str += String.format("Settings handsPerLevel %d\n", handsPerLevel);
-				str += String.format("Settings startingStack %d\n", startingStack);
+				str += String.format("Settings hands_per_level %d\n", handsPerLevel);
+				str += String.format("Settings starting_stack %d\n", startingStack);
 			}
 			else
 			{
-				str += String.format("Settings smallBlind %d\n", sizeSB);
-				str += String.format("Settings bigBlind %d\n", sizeBB);
+				str += String.format("Settings small_blind %d\n", sizeSB);
+				str += String.format("Settings big_blind %d\n", sizeBB);
 			}
 		}
 		//not needed in headsup
